@@ -7,6 +7,9 @@ dist
 
 # cloudflare / wrangler
 .wrangler
+.dev.vars
+.dev.vars.*
+worker-configuration.d.ts
 
 # environment variable files
 .env
