@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "build": "vp build",
+    "cf-typegen": "wrangler types",
     "check": "vp check",
+    "deploy": "vp build && wrangler deploy",
     "dev": "vp dev",
     "doctor": "react-doctor . --verbose --yes --no-lint",
     "fix": "vp check --fix",
@@ -22,6 +24,7 @@
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.39.0",
     "@rolldown/plugin-babel": "^0.2.3",
     "@tailwindcss/vite": "^4.3.0",
     "@tanstack/react-router-devtools": "^1.167.0",
@@ -35,7 +38,8 @@
     "react-doctor": "^0.2.11",
     "tailwindcss": "^4.3.0",
     "vite": "npm:@voidzero-dev/vite-plus-core@^0.1.23",
-    "vite-plus": "latest"
+    "vite-plus": "latest",
+    "wrangler": "^4.95.0"
   },
   "packageManager": "pnpm@11.2.2"
 }

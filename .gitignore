@@ -5,6 +5,9 @@ node_modules
 dist
 .output
 
+# cloudflare / wrangler
+.wrangler
+
 # environment variable files
 .env
 .env.development.local

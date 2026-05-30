@@ -4,8 +4,12 @@ overrides:
 
 onlyBuiltDependencies:
   - esbuild
+  - workerd
 
 minimumReleaseAge: 0
 
 allowBuilds:
+  esbuild: true
   msgpackr-extract: false
+  sharp: false
+  workerd: true
