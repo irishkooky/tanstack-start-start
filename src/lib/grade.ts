@@ -22,7 +22,9 @@ const MODEL = "claude-sonnet-4-6";
 export const gradeAnswer = createServerFn({ method: "POST" })
   .inputValidator((data: GradeInput) => data)
   .handler(async ({ data }) => {
-    const apiKey = env.ANTHROPIC_API_KEY;
+    // 本番(workerd)では cloudflare:workers の env が届かない場合があるため、
+    // nodejs_compat 経由の process.env もフォールバックで見る。
+    const apiKey = env.ANTHROPIC_API_KEY ?? process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
       return textResponse("ANTHROPIC_API_KEY が設定されていません。", 500);
     }

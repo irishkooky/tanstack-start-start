@@ -5,3 +5,8 @@ declare module "cloudflare:workers" {
     ANTHROPIC_API_KEY?: string;
   };
 }
+
+// nodejs_compat 経由で参照する process.env のフォールバック用（最小宣言）。
+declare const process: {
+  env: Record<string, string | undefined>;
+};
