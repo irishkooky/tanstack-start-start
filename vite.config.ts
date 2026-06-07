@@ -11,6 +11,11 @@ const reactDoctorRules = {
   ...TANSTACK_START_RULES,
 };
 
+// テスト実行時は Cloudflare プラグインを外す。worker 環境向けに注入される
+// resolve.external が vite-plus-test と衝突して起動できないため。純粋関数の
+// 単体テストに workerd 環境は不要。
+const isTest = !!process.env.VITEST;
+
 export default defineConfig({
   fmt: {
     ignorePatterns: ["**/routeTree.gen.ts"],
@@ -64,7 +69,7 @@ export default defineConfig({
     "*.{js,jsx,ts,tsx,json,css}": "vp check --fix",
   },
   plugins: [
-    cloudflare({ viteEnvironment: { name: "ssr" } }),
+    ...(isTest ? [] : [cloudflare({ viteEnvironment: { name: "ssr" } })]),
     tailwindcss(),
     tanstackStart(),
     // react's vite plugin must come after start's vite plugin
