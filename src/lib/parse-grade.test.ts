@@ -26,10 +26,18 @@ describe("parseGrade", () => {
     expect(parseGrade("コメント\nSCORE: 150").score).toBe(100);
   });
 
-  it("コメント中に SCORE 文字列が紛れても、最後の出現を採用する", () => {
+  it("コメント中に数字付き SCORE が複数あれば、最後の出現を採用する", () => {
+    const raw = "暫定 SCORE: 40 と書いたが訂正します。\nSCORE: 60";
+    expect(parseGrade(raw)).toEqual({
+      comment: "暫定 SCORE: 40 と書いたが訂正します。",
+      score: 60,
+    });
+  });
+
+  it("数字を伴わない素の SCORE: はスコアではなく本文として残す", () => {
     const raw = "最後の行に SCORE: を出力します。\nSCORE: 60";
     expect(parseGrade(raw)).toEqual({
-      comment: "最後の行に  を出力します。",
+      comment: "最後の行に SCORE: を出力します。",
       score: 60,
     });
   });
