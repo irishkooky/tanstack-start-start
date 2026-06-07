@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { gradeAnswer } from "../lib/grade";
+import { parseGrade } from "../lib/parse-grade";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -41,13 +42,9 @@ function Home() {
       if (done) break;
       buffer += decoder.decode(value, { stream: true });
 
-      const match = buffer.match(/SCORE:\s*(\d+)/);
-      if (match?.[1]) {
-        setScore(Math.min(100, Number.parseInt(match[1], 10)));
-        setComment(buffer.replace(/SCORE:\s*\d+/, "").trim());
-      } else {
-        setComment(buffer);
-      }
+      const { comment: parsedComment, score: parsedScore } = parseGrade(buffer);
+      setComment(parsedComment);
+      if (parsedScore !== null) setScore(parsedScore);
     }
 
     setStatus("done");
