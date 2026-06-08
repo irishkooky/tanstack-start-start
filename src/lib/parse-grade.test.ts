@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vite-plus/test";
 
 import { parseGrade } from "./parse-grade";
-// hoge
+
 describe("parseGrade", () => {
   it("最終行の SCORE をスコアとして取り出し、コメントから除去する", () => {
     const raw = "良い回答です。具体性があります。\nSCORE: 85";
